@@ -68,6 +68,7 @@ console.log(heading);
 
 
 
+
 /**
  * Creating an HTML element of the following structure
  * <div id="parent">
