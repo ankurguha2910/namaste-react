@@ -86,6 +86,7 @@ console.log(heading);
  * </div>
  */
 
+/*
 const heading = React.createElement("div",{id: "parent"},
     [
         React.createElement("div",{id: "child1"},
@@ -102,8 +103,55 @@ const heading = React.createElement("div",{id: "parent"},
         )
     ]
 )
-//creating a root 
+// creating a root 
 const root =  ReactDOM.createRoot(document.getElementById("root"));
 
-//rendered the heading into the root(changes the object, element into an HTML element and adds it to the web page)
+// rendered the heading into the root(changes the object, element into an HTML element and adds it to the web page)
 root.render(heading);
+*/
+
+
+// Create a React element using JSX
+const jsxheading = (<h1 id="heading" className="head" tabIndex="2">
+    JSX Heading is HTML type or XML type syntax</h1>);
+
+//const anchor = <a href="https://www.google.com">Google link</a>
+
+console.log(jsxheading);
+
+// React Functional component
+// HeadingComponent and HeadingComponent2 are same
+/*const HeadingComponent = () => {
+    return <h1 className="heading">React Functional comonent</h1>;
+};*/
+
+const Title = () => (
+<h1 className="title" tabIndex="5">
+Another React functional componenet
+</h1>
+);
+
+const age = 31;
+// Component composition
+const HeadingComponent2 = () => (
+    <div id="container">
+        {jsxheading}
+        <Title/>
+        {Title()}
+        <Title></Title>
+        <h2>{age}</h2>
+        <h1 className="heading">React Functional comonent</h1>
+    </div>
+);
+
+const element = (
+<span>Span element</span>
+);
+
+ 
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+//root.render(jsxheading);
+//root.render(anchor);
+root.render(<HeadingComponent2/>);
