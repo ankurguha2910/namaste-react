@@ -66,3 +66,8 @@
     padding: 5px;
     gap: 10px;
 }
+
+.filter-button {
+    margin: 10px;
+    cursor: pointer;
+}
