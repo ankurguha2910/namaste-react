@@ -1,0 +1,37 @@
+{
+  "name": "react-practice",
+  "version": "1.0.0",
+  "description": "React practice",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ankurguha2910/react-practice.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Ankur Guha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ankurguha2910/react-practice/issues"
+  },
+  "homepage": "https://github.com/ankurguha2910/react-practice#readme",
+  "devDependencies": {
+    "parcel": "^2.12.0",
+    "postcss": "^8.4.47",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.4.13"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
+}
