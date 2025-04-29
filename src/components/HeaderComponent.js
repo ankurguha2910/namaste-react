@@ -11,29 +11,29 @@ const HeaderComponent = () => {
         console.log("UseEffect rendered");
     },[newButton])
     return (
-        <div className="header">
+        <div className="flex justify-between bg-pink-100 shadow-lg sm:bg-yellow-50 lg:bg-green-50">
             <div className="image-container">
-                <img className="image" src={LOGO_URL}/>
+                <img className="w-44" src={LOGO_URL}/>
             </div>
-            <div className="nav-container">
-                <ul>
-                    <li>
+            <div className="flex items-center">
+                <ul className="flex p-4 m-4">
+                    <li className="px-4">
                         Online Status: {onlineStatus ? "Online" : "Offline"}
                     </li>
-                    <li>
+                    <li className="px-4">
                         <Link to="/">Home</Link>
                     </li>
-                    <li>
+                    <li className="px-4">
                         <Link to="/about">About Us</Link>
                     </li>
-                    <li>
+                    <li className="px-4">
                         <Link to="/contact">Contact</Link>
                     </li>
-                    <li>
+                    <li className="px-4">
                         <Link to="/grocery">Grocery</Link>
                     </li>
-                    <li>Cart</li>
-                    <button className="login" onClick={() => { 
+                    <li className="px-4">Cart</li>
+                    <button className="px-4" onClick={() => { 
                         newButton === 'LogIn' ? setnewButton("LogOut") : setnewButton("LogIn")}}>{newButton}</button>
                 </ul>
             </div>

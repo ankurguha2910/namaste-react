@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, {RestaurantCardOffer} from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import ShimmerComponent from "./ShimmerComponent";
 import { Link } from "react-router-dom";
@@ -12,6 +12,8 @@ const BodyComponent = () => {
 
     const [searchText, setsearchText] = useState("");
 
+    console.log(listOfRestaurants);
+    const OfferRestaurants = RestaurantCardOffer(RestaurantCard);
     useEffect(() => {
         fetchData();
     }, [])
@@ -20,7 +22,7 @@ const BodyComponent = () => {
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.4770904&lng=88.3404497&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
 
         const json = await data.json();
-        //optional chaining
+        //optional chaining osing the ? operator
         setlistOfRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setfilteredList(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     }
@@ -31,31 +33,41 @@ const BodyComponent = () => {
         return (<h1>You are offline! Please check your internet connection!!</h1>);
     }
 
+    // if(filteredList.length === 0)
+    // {
+    //     return (<h1 className="text-center font-bold text-2xl py-6">Record not found</h1>)
+    // }
+
     //Conditional Rendering
     return listOfRestaurants.length === 0 ? <ShimmerComponent/> : (
         <div className="body">
-            <div className="filter">
-                <div className="search">
-                    <input type="text" className="seach-bar" value={searchText} onChange={(e) => {
+            <div className="flex">
+                <div className="m-1 p-1">
+                    <input type="text" className="px-4 py-2 m-2 border border-solid rounded-lg border-green-200" value={searchText} onChange={(e) => {
                         setsearchText(e.target.value);
                     }}></input>
-                    <button className="search-button" onClick={() => {
+                    <button className="bg-green-200 px-4 py-2 m-2 rounded-lg" onClick={() => {
                         const filteredData =  listOfRestaurants.filter((res) => {
                             return res?.info?.name.toLowerCase().includes(searchText.toLowerCase());
                         })
-                        setfilteredList(filteredData);
+                        setfilteredList(filteredData)
                     }}>Search</button>
                 </div>
+                <div className="m-1 p-1">
                 <button 
-                className="filter-button" 
+                className="bg-green-200 px-4 py-2 m-2 rounded-lg" 
                 onClick={() => {
                     const filteredList = listOfRestaurants.filter((res) => res.info.avgRatingString > 4.4)
-                    setlistOfRestaurants(filteredList)
+                    setfilteredList(filteredList)
                 }}>Top Rated Restaurant</button>
+                </div>
             </div>
-            <div className="res-container">
+            <div className="flex flex-wrap">
                 {filteredList.map((restaurant) => (
-                    <Link key={restaurant.info.id} to={"/restaurants/"+ restaurant.info.id}><RestaurantCard resData={restaurant}/></Link>)
+                    <Link key={restaurant.info.id} to={"/restaurants/"+ restaurant.info.id}>
+                        {
+                        restaurant?.info?.aggregatedDiscountInfoV3 ? (<OfferRestaurants resData={restaurant}/>) : (<RestaurantCard resData={restaurant}/>)
+                        }</Link>)
                 )}
             </div>
         </div>

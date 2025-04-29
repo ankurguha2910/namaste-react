@@ -3,7 +3,6 @@ import { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import HeaderComponent from "./components/HeaderComponent";
 import BodyComponent from "./components/BodyComponent";
-//import AboutComponent from "./components/AboutComponent";
 import ContactComponent from "./components/ContactComponent";
 import ErrorComponent from "./components/ErrorComponent";
 import RestaurantMenuComponent from "./components/RestaurantMenuComponent";
@@ -18,7 +17,7 @@ const AboutComponent = lazy(() => import("./components/AboutComponent"));
 
 const AppComponent = () => {
     return (
-        <div className="container">
+        <div>
             <HeaderComponent/>
             <Outlet/>
         </div>

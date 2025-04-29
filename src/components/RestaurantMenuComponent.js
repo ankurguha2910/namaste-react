@@ -14,7 +14,10 @@ const RestaurantMenuComponent = () => {
     const { name, cuisines, costForTwoMessage, sla, avgRatingString } = resData?.cards[2]?.card?.card?.info;
    
     const {itemCards} = resData?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card || resData?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
-    
+    const categories = resData?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c) => {
+        return c.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    })
+    console.log(categories);
     return (
     <div className="menu">
         <h1>{name}</h1>
