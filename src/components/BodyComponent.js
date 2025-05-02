@@ -1,8 +1,9 @@
 import RestaurantCard, {RestaurantCardOffer} from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ShimmerComponent from "./ShimmerComponent";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const BodyComponent = () => {
     // local state variable - super powerful variable
@@ -11,18 +12,16 @@ const BodyComponent = () => {
     const [filteredList, setfilteredList] = useState([]);
 
     const [searchText, setsearchText] = useState("");
-
-    console.log(listOfRestaurants);
     const OfferRestaurants = RestaurantCardOffer(RestaurantCard);
     useEffect(() => {
         fetchData();
     }, [])
-    
+    const { loggedInUser, setUserName } = useContext(UserContext);
     const fetchData = async () => {
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.4770904&lng=88.3404497&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
 
         const json = await data.json();
-        //optional chaining osing the ? operator
+        //optional chaining using the ? operator
         setlistOfRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setfilteredList(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     }
@@ -60,6 +59,12 @@ const BodyComponent = () => {
                     const filteredList = listOfRestaurants.filter((res) => res.info.avgRatingString > 4.4)
                     setfilteredList(filteredList)
                 }}>Top Rated Restaurant</button>
+                </div>
+                <div className="m-1 p-1">
+                    <label>User Name : </label>
+                    <input className="p-2 border border-black" value={loggedInUser} onChange={(e) => {
+                        setUserName(e.target.value);
+                    }}></input>
                 </div>
             </div>
             <div className="flex flex-wrap">

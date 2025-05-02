@@ -25,7 +25,7 @@ class UserClassComponent extends React.Component
         const {count} = this.state;
         const {name, location, email, avatar_url} = this.state.response
         return (
-            <div className="userCard">
+            <div>
                 <h1>Count = {count}</h1>
                 <button onClick={() => {
                     this.setState({

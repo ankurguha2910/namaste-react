@@ -1,7 +1,10 @@
 import { CDN_URL } from "../utils/constants";
+import { useContext } from "react";
+import UserContext from "../utils/UserContext";
 
 const RestaurantCard = (props) => {
     const {resData} = props
+    const {loggedInUser} = useContext(UserContext);
     // object destructuring
     const { cloudinaryImageId, name, costForTwo, cuisines, avgRatingString, sla  } = resData?.info;
     return (
@@ -12,6 +15,7 @@ const RestaurantCard = (props) => {
             <h4>{sla?.slaString}</h4>
             <h4>{avgRatingString} stars</h4>
             <h4>{cuisines.join(", ")}</h4>
+            <h4>User : {loggedInUser}</h4>
         </div>
     )
 }
